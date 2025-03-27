@@ -1,10 +1,10 @@
 import machine
 import time
 
-# Configure Pin 0 as output (built-in LED on most ESP modules)
-led = machine.Pin(0, machine.Pin.OUT)
+# For ESP8266 (NodeMCU) and ESP32 - Built-in LED pin
+led = machine.Pin(2, machine.Pin.OUT)  # GPIO2 is default for built-in LED
 
-# Blink LED with 0.5s interval
+# Blink LED with 0.5-second interval
 while True:
     led.on()  # Turn LED ON
     time.sleep(0.5)
