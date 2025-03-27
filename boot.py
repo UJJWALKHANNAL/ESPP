@@ -21,6 +21,7 @@ def save_config(ssid, password):
     try:
         with open("config.json", "w") as f:
             json.dump({"ssid": ssid, "password": password}, f)
+            print("Wi-Fi credentials saved successfully!")
     except Exception as e:
         print("Error saving config:", e)
 
@@ -30,7 +31,7 @@ def connect_to_wifi():
     
     if not config or not config.get("ssid") or not config.get("password"):
         print("No valid Wi-Fi config found, starting AP...")
-        start_ap_mode()  # Start Hotspot if no config found
+        start_ap_mode()
         return False
     
     ssid = config.get("ssid")
@@ -51,24 +52,20 @@ def connect_to_wifi():
     if wlan.isconnected():
         print("Wi-Fi connected!")
         print("IP Address:", wlan.ifconfig()[0])
-        led.off()  # LED OFF when connected
+        led.off()
         return True
     else:
         print("Failed to connect, starting AP...")
         start_ap_mode()
         return False
 
-# Start Hotspot (AP Mode)
+# Start Hotspot (AP Mode) if Wi-Fi Fails
 def start_ap_mode():
-    ap = network.WLAN(network.AP_IF)
-    ap.active(True)
-    ap.config(essid="ESP_SETUP", authmode=network.AUTH_OPEN)  # Open Hotspot
-    print("Hotspot Started! Connect to 'ESP_SETUP' to configure Wi-Fi.")
-    led.on()  # LED ON when AP mode is active
+    import web_setup  # Start web setup to configure Wi-Fi
 
-# Main Execution
+# Run Wi-Fi Connection
 if not connect_to_wifi():
-    import main
-# 
+    import web_setup  # If connection fails, run web setup to enter Wi-Fi details
 
-
+# Run main.py after Wi-Fi connection
+import main
