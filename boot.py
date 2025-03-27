@@ -52,7 +52,7 @@ def connect_to_wifi():
     if wlan.isconnected():
         print("Wi-Fi connected!")
         print("IP Address:", wlan.ifconfig()[0])
-        led.off()
+        led.off()  # LED OFF when connected
         return True
     else:
         print("Failed to connect, starting AP...")
@@ -64,8 +64,11 @@ def start_ap_mode():
     import web_setup  # Start web setup to configure Wi-Fi
 
 # Run Wi-Fi Connection
-if not connect_to_wifi():
+if connect_to_wifi():
+    print("Starting main.py...")
+    import telegram
+    #import main  # Run main.py after Wi-Fi connection
+else:
+    print("Failed to connect to Wi-Fi. Starting web_setup.")
     import web_setup  # If connection fails, run web setup to enter Wi-Fi details
 
-# Run main.py after Wi-Fi connection
-import main
