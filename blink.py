@@ -10,5 +10,5 @@ while True:
     time.sleep(1)
     print("led on")
     led.off()  # Turn LED OFF
-    time.sleep(0.3)
+    time.sleep(3)
     print("led off")
