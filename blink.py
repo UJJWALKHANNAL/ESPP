@@ -8,5 +8,7 @@ led = machine.Pin(2, machine.Pin.OUT)  # GPIO2 is default for built-in LED
 while True:
     led.on()  # Turn LED ON
     time.sleep(0.5)
+    print("led on")
     led.off()  # Turn LED OFF
     time.sleep(0.5)
+    print("led off")
