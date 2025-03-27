@@ -7,7 +7,7 @@ led = machine.Pin(2, machine.Pin.OUT)  # GPIO2 is default for built-in LED
 # Blink LED with 0.5-second interval
 while True:
     led.on()  # Turn LED ON
-    time.sleep(0.1)
+    time.sleep(1)
     print("led on")
     led.off()  # Turn LED OFF
     time.sleep(0.3)
